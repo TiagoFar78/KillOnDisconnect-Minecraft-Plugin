@@ -7,11 +7,18 @@ import org.bukkit.Bukkit;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.plugin.java.JavaPlugin;
 
+import redehexen.killOnDisconnect.commands.KillOnDisconnectCommand;
+
 public class KillOnDisconnect extends JavaPlugin {
+	
+	public static final String SET_REGION_PERMISSION = "TF_KillOnDisconnect.SetRegion";
+	public static final String RELOAD_PERMISSION = "TF_KillOnDisconnect.Reload";
 	
 	@Override
 	public void onEnable() {
+		getServer().getPluginManager().registerEvents(new Events(), this);
 		
+		getCommand("KillOnDisconnect").setExecutor(new KillOnDisconnectCommand());
 	}
 	
 	public static YamlConfiguration getYamlConfiguration() {

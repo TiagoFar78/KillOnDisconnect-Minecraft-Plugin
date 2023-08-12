@@ -1,0 +1,65 @@
+package redehexen.killOnDisconnect.commands;
+
+import org.bukkit.Location;
+import org.bukkit.command.CommandSender;
+import org.bukkit.configuration.file.YamlConfiguration;
+import org.bukkit.entity.Player;
+
+import redehexen.killOnDisconnect.KillOnDisconnect;
+
+public class SetRegionSubcommand implements KillOnDisconnectSubcommand {
+
+	@Override
+	public void execute(CommandSender sender, String cmdlabel, String[] args) {
+		if (!(sender instanceof Player)) {
+			// TODO mensagem de nao pode
+			return;
+		}
+		
+		if (!sender.hasPermission(KillOnDisconnect.SET_REGION_PERMISSION)) {
+			// TODO mensagem que nao pode
+			return;
+		}
+		
+		if (args.length != 2) {
+			// TODO usage
+			return;
+		}
+		
+		String regionName = args[0];
+		int positionIndex = convertToInteger(args[1]);
+		if (positionIndex != 1 && positionIndex != 2) {
+			// TODO usage
+			return;
+		}
+		
+		Location playerLoc = ((Player) sender).getLocation();
+		String worldName = playerLoc.getWorld().getName();
+		int x = playerLoc.getBlockX();
+		int y = playerLoc.getBlockY();
+		int z = playerLoc.getBlockZ();
+		
+		String path = "Regions." + regionName + ".";
+		
+		YamlConfiguration config = KillOnDisconnect.getYamlConfiguration();
+		
+		config.set(path + "World", worldName);
+		path += "Loc" + positionIndex + ".";
+		config.set(path + "X", x);
+		config.set(path + "Y", y);
+		config.set(path + "Z", z);
+		
+		KillOnDisconnect.saveConfiguration(config);
+		
+		// TODO success
+	}
+	
+	private int convertToInteger(String arg) {
+		try {
+			return Integer.parseInt(arg);
+		} catch (NumberFormatException e) {
+			return -1;
+		}
+	}
+
+}
