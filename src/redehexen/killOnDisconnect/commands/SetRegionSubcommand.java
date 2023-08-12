@@ -6,30 +6,33 @@ import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
 
 import redehexen.killOnDisconnect.KillOnDisconnect;
+import redehexen.killOnDisconnect.managers.ConfigManager;
 
 public class SetRegionSubcommand implements KillOnDisconnectSubcommand {
 
 	@Override
 	public void execute(CommandSender sender, String cmdlabel, String[] args) {
+		ConfigManager configManager = ConfigManager.getInstance();
+		
 		if (!(sender instanceof Player)) {
-			// TODO mensagem de nao pode
+			sender.sendMessage(configManager.getMustBePlayerMessage());
 			return;
 		}
 		
 		if (!sender.hasPermission(KillOnDisconnect.SET_REGION_PERMISSION)) {
-			// TODO mensagem que nao pode
+			sender.sendMessage(configManager.getNotAllowedMessage());
 			return;
 		}
 		
 		if (args.length != 2) {
-			// TODO usage
+			sender.sendMessage(configManager.getSetPositionUsageMessage());
 			return;
 		}
 		
 		String regionName = args[0];
 		int positionIndex = convertToInteger(args[1]);
 		if (positionIndex != 1 && positionIndex != 2) {
-			// TODO usage
+			sender.sendMessage(configManager.getWrongIndexMessage());
 			return;
 		}
 		
@@ -51,7 +54,7 @@ public class SetRegionSubcommand implements KillOnDisconnectSubcommand {
 		
 		KillOnDisconnect.saveConfiguration(config);
 		
-		// TODO success
+		sender.sendMessage(configManager.getPositionSetMessage());
 	}
 	
 	private int convertToInteger(String arg) {

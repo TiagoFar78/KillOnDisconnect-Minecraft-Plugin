@@ -10,15 +10,17 @@ public class ReloadSubcommand implements KillOnDisconnectSubcommand {
 
 	@Override
 	public void execute(CommandSender sender, String cmdlabel, String[] args) {
+		ConfigManager configManager = ConfigManager.getInstance();
+		
 		if (!sender.hasPermission(KillOnDisconnect.SET_REGION_PERMISSION)) {
-			// TODO mensagem que nao pode
+			sender.sendMessage(configManager.getNotAllowedMessage());
 			return;
 		}
 		
 		ConfigManager.reload();
 		RegionManager.reload();
 		
-		// TODO success
+		sender.sendMessage(configManager.getReloadedMessage());
 	}
 	
 	

@@ -1,0 +1,7 @@
+name: TF_KillOnDisconnect
+version: 1.0
+author: TiagoFar78
+main: redehexen.killOnDisconnect.KillOnDisconnect
+commands:
+  KillOnDisconnect:
+  
