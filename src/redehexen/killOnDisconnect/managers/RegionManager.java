@@ -26,7 +26,7 @@ public class RegionManager {
 		
 		List<Region> regionsList = new ArrayList<Region>();
 		
-		List<String> regionsPath = config.getKeys(false).stream().filter(p -> p.startsWith(REGION_PREFIX) && p.lastIndexOf(".") == REGION_PREFIX.length()).collect(Collectors.toList());
+		List<String> regionsPath = config.getKeys(true).stream().filter(p -> p.startsWith(REGION_PREFIX) && p.lastIndexOf(".") == REGION_PREFIX.length()).collect(Collectors.toList());
 		
 		for (String regionPath : regionsPath) {
 			Location loc1 = getLocationFromConfig(config, regionPath, "1");

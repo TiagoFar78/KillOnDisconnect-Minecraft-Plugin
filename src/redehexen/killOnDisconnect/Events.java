@@ -12,6 +12,7 @@ public class Events implements Listener {
 	@EventHandler
 	public void playerQuit(PlayerQuitEvent e) {
 		Player player = e.getPlayer();
+		
 		if (RegionManager.isOnKillRegion(player.getLocation())) {
 			player.setHealth(0);
 		}
