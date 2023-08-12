@@ -15,7 +15,11 @@ public class KillOnDisconnect extends JavaPlugin {
 	public static final String RELOAD_PERMISSION = "TF_KillOnDisconnect.Reload";
 	
 	@Override
-	public void onEnable() {
+	public void onEnable() {		
+		if (!new File(getDataFolder(), "config.yml").exists()) {
+			saveDefaultConfig();
+		}
+		
 		getServer().getPluginManager().registerEvents(new Events(), this);
 		
 		getCommand("KillOnDisconnect").setExecutor(new KillOnDisconnectCommand());
