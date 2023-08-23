@@ -12,7 +12,7 @@ public class ReloadSubcommand implements KillOnDisconnectSubcommand {
 	public void execute(CommandSender sender, String cmdlabel, String[] args) {
 		ConfigManager configManager = ConfigManager.getInstance();
 		
-		if (!sender.hasPermission(KillOnDisconnect.SET_REGION_PERMISSION)) {
+		if (!sender.hasPermission(KillOnDisconnect.RELOAD_PERMISSION)) {
 			sender.sendMessage(configManager.getNotAllowedMessage());
 			return;
 		}
@@ -22,7 +22,5 @@ public class ReloadSubcommand implements KillOnDisconnectSubcommand {
 		
 		sender.sendMessage(configManager.getReloadedMessage());
 	}
-	
-	
 
 }
