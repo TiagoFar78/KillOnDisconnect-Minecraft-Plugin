@@ -13,7 +13,7 @@ public class KillOnDisconnectCommand implements CommandExecutor {
 	private static final String RELOAD_COMMAND = "reload";
 
 	@Override
-	public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {		
+	public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
 		if (args.length == 0) {
 			sendGeneralUsageMessage(sender);
 			return false;
